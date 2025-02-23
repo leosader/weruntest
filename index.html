@@ -17,11 +17,35 @@
         p {
             color: #333;
         }
+        nav {
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #ff6600;
+            font-weight: bold;
+        }
     </style>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="treino.html">Plano de Treino</a>
+        <a href="loja.html">Loja</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" onclick="loginGoogle()">Login</a>
+    </nav>
+    
     <h1>Bem-vindo ao We Run!</h1>
     <p>Seu clube de assinatura para corredores.</p>
     <p>Estamos construindo algo incrível! Em breve, mais novidades.</p>
+    
+    <script>
+        function loginGoogle() {
+            alert("Login com Google em breve!");
+        }
+    </script>
 </body>
 </html>
