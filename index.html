@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We Run! - MVP</title>
+    <title>Login - We Run!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,34 +14,96 @@
         h1 {
             color: #ff6600;
         }
-        p {
-            color: #333;
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
         }
-        nav {
-            margin-bottom: 20px;
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
         }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #ff6600;
-            font-weight: bold;
+        button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #e65c00;
         }
     </style>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZm7gntbg74QAuxGeOcxK4IWlttlhANRk",
+            authDomain: "werun-25f80.firebaseapp.com",
+            projectId: "werun-25f80",
+            storageBucket: "werun-25f80.firebasestorage.app",
+            messagingSenderId: "154077975455",
+            appId: "1:154077975455:web:68c53773e71ede996de3aa"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        function loginGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    alert("Login bem-sucedido: " + result.user.displayName);
+                })
+                .catch(error => {
+                    alert("Erro no login: " + error.message);
+                });
+        }
+
+        function loginEmail() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    alert("Login bem-sucedido: " + userCredential.user.email);
+                })
+                .catch(error => {
+                    alert("Erro no login: " + error.message);
+                });
+        }
+
+        function registerEmail() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    alert("Cadastro bem-sucedido: " + userCredential.user.email);
+                })
+                .catch(error => {
+                    alert("Erro no cadastro: " + error.message);
+                });
+        }
+    </script>
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="treino.html">Plano de Treino</a>
-        <a href="loja.html">Loja</a>
-        <a href="blog.html">Blog</a>
-        <a href="#" onclick="loginGoogle()">Login</a>
-    </nav>
-    
-    <h1>Bem-vindo ao We Run!</h1>
-    <p>Seu clube de assinatura para corredores.</p>
-    <p>Estamos construindo algo incrível! Em breve, mais novidades.</p>
-    
-    <script>
+    <h1>Login no We Run!</h1>
+    <div class="login-container">
+        <p>Clique no botão abaixo para fazer login com sua conta Google:</p>
+        <button onclick="loginGoogle()">Login com Google</button>
+        <hr>
+        <p>Ou faça login com e-mail e senha:</p>
+        <input type="email" id="email" placeholder="E-mail">
+        <input type="password" id="password" placeholder="Senha">
+        <button onclick="loginEmail()">Entrar</button>
+        <button onclick="registerEmail()">Cadastrar</button>
+    </div>
 </body>
 </html>
