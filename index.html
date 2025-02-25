@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - We Run!</title>
+    <title>We Run! - Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +61,7 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
                 .then(result => {
-                    alert("Login bem-sucedido: " + result.user.displayName);
+                    window.location.href = 'home.html';
                 })
                 .catch(error => {
                     alert("Erro no login: " + error.message);
@@ -73,7 +73,7 @@
             const password = document.getElementById("password").value;
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    alert("Login bem-sucedido: " + userCredential.user.email);
+                    window.location.href = 'home.html';
                 })
                 .catch(error => {
                     alert("Erro no login: " + error.message);
@@ -94,12 +94,12 @@
     </script>
 </head>
 <body>
-    <h1>Login no We Run!</h1>
+    <h1>Bem-vindo ao We Run!</h1>
     <div class="login-container">
-        <p>Clique no botão abaixo para fazer login com sua conta Google:</p>
+        <p>Faça login para acessar sua conta:</p>
         <button onclick="loginGoogle()">Login com Google</button>
         <hr>
-        <p>Ou faça login com e-mail e senha:</p>
+        <p>Ou entre com e-mail e senha:</p>
         <input type="email" id="email" placeholder="E-mail">
         <input type="password" id="password" placeholder="Senha">
         <button onclick="loginEmail()">Entrar</button>
